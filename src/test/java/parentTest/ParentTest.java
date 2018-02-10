@@ -10,6 +10,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import pages.LoginPage;
+import pages.MainPage;
 
 import java.io.File;
 import java.util.concurrent.TimeUnit;
@@ -20,6 +22,8 @@ public class ParentTest {
     public WebDriver webDriver;
     String browser = System.getProperty("browser");
     Logger log;
+    protected MainPage mainPage;
+    protected LoginPage loginPage;
 
     @Before
     public void setUp() {
@@ -27,6 +31,9 @@ public class ParentTest {
         setBrowser();
         webDriver.manage().window().maximize();
         webDriver.manage().timeouts().implicitlyWait(configProperties.TIME_FOR_DFFAULT_WAIT(), TimeUnit.SECONDS);
+
+        mainPage = new MainPage(webDriver);
+        loginPage = new LoginPage(webDriver);
     }
 
     private void setBrowser() {
